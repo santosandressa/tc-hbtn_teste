@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 public class TesteEmail {
+
     public void testar_email_com_arroba(){
         String email = "email_teste@dominio.com.br";
 
