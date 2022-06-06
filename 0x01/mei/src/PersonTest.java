@@ -1,17 +1,18 @@
+package src;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("deprecation")
 public class PersonTest {
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         Person person = new Person();
         person.setName("Paul");
         person.setSurname("McCartney");
@@ -22,29 +23,36 @@ public class PersonTest {
     }
 
     @Test
-    public void show_full_name(){
-        Person person = new Person();
-        assertEquals("Paul McCartney", Person.fullName(person.getName(), person.getSurname()));
+    public void show_full_name() {
+        assertEquals("Paul McCartney", Person.fullName("Paul", "McCartney"));
     }
 
     @Test
-    public void test_calculateYearlySalary(){
+    public void test_calculateYearlySalary() {
+        assertEquals(14400, new Person().calculateYearlySalary(1200));
+    }
+
+    @Test
+    public void person_is_MEI() {
         float salary = 1200;
+        Date birthDate = new Date(2000, Calendar.JANUARY, 1);
+        Person person = new Person();
+        person.setPublicServer(false);
+        person.setPensioner(false);
+        person.setAnotherCompanyOwner(false);
 
-        assertEquals(salary, Person.calculateYearlySalary(salary), 0);
+        assertTrue(Person.isMEI(salary, person.isAnotherCompanyOwner(), person.isPensioner(), person.isPublicServer(), birthDate));
     }
 
     @Test
-    public void person_is_MEI(){
+    public void person_is_not_MEI() {
+        float salary = 50000;
+        Date birthDate = new Date(2000, Calendar.JANUARY, 1);
         Person person = new Person();
+        person.setPublicServer(true);
+        person.setPensioner(true);
+        person.setAnotherCompanyOwner(true);
 
-        assertTrue(Person.isMEI(person.getSalary(), person.isAnotherCompanyOwner(), person.isPensioner(), person.isPublicServer(), person.getBirthDate()));
-    }
-
-    @Test
-    public void person_is_not_MEI(){
-        Person person = new Person();
-
-        assertTrue(!Person.isMEI(person.getSalary(), person.isAnotherCompanyOwner(), person.isPensioner(), person.isPublicServer(), person.getBirthDate()));
+        assertFalse(Person.isMEI(salary, person.isAnotherCompanyOwner(), person.isPensioner(), person.isPublicServer(), birthDate));
     }
 }
