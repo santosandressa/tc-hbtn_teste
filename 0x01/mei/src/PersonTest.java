@@ -1,7 +1,5 @@
 package src;
 
-import src.Person;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -10,11 +8,21 @@ import static org.junit.Assert.assertTrue;
 
 public class PersonTest {
 
-    public void show_full_name(){
-        String name = "Paul";
-        String surname = "McCartney";
+    public Person setUp(){
+        Person person = new Person();
+        person.setName("Paul");
+        person.setSurname("McCartney");
+        person.setBirthDate(new Date(2000, Calendar.JANUARY, 1));
+        person.setAnotherCompanyOwner(true);
+        person.setPensioner(true);
+        person.setPublicServer(true);
 
-        assertEquals("Paul McCartney", Person.fullName(name, surname));
+        return person;
+    }
+
+    public void show_full_name(){
+        Person person = setUp();
+        assertEquals("Paul McCartney", Person.fullName(person.getName(), person.getSurname()));
     }
 
     public void test_calculateYearlySalary(){
@@ -24,27 +32,13 @@ public class PersonTest {
     }
 
     public void person_is_MEI(){
-        Person person = new Person();
-        person.setSalary(1200);
-        person.setPensioner(true);
-        person.setBirthDate(new Date(1980, Calendar.FEBRUARY, 1));
-        person.setName("Paul");
-        person.setSurname("McCartney");
-        person.setAnotherCompanyOwner(true);
-        person.setPublicServer(true);
+        Person person = setUp();
 
         assertTrue(Person.isMEI(person.getSalary(), person.isAnotherCompanyOwner(), person.isPensioner(), person.isPublicServer(), person.getBirthDate()));
     }
 
     public void person_is_not_MEI(){
-        Person person = new Person();
-        person.setSalary(1200);
-        person.setPensioner(true);
-        person.setBirthDate(new Date(1980, Calendar.FEBRUARY, 1));
-        person.setName("Paul");
-        person.setSurname("McCartney");
-        person.setAnotherCompanyOwner(true);
-        person.setPublicServer(false);
+        Person person = setUp();
 
         assertTrue(!Person.isMEI(person.getSalary(), person.isAnotherCompanyOwner(), person.isPensioner(), person.isPublicServer(), person.getBirthDate()));
     }
