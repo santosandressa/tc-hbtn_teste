@@ -1,3 +1,4 @@
+package src;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SuppressWarnings("deprecation")
 public class PersonTest {
 
     @BeforeEach
@@ -15,7 +15,7 @@ public class PersonTest {
         Person person = new Person();
         person.setName("Paul");
         person.setSurname("McCartney");
-        person.setBirthDate(new Date(2000, Calendar.JANUARY, 1));
+        person.setBirthDate(new Calendar.Builder().setDate(1942, Calendar.JANUARY, 8).build().getTime());
         person.setAnotherCompanyOwner(true);
         person.setPensioner(true);
         person.setPublicServer(true);
@@ -28,25 +28,25 @@ public class PersonTest {
 
     @Test
     public void test_calculateYearlySalary() {
-        assertEquals(14400, new Person().calculateYearlySalary(1200));
+        assertEquals(14400, Person.calculateYearlySalary(1200));
     }
 
     @Test
     public void person_is_MEI() {
         float salary = 1200;
-        Date birthDate = new Date(2000, Calendar.JANUARY, 1);
         Person person = new Person();
+        person.setBirthDate(new Calendar.Builder().setDate(1942, Calendar.JANUARY, 8).build().getTime());
         person.setPublicServer(false);
         person.setPensioner(false);
         person.setAnotherCompanyOwner(false);
 
-        assertTrue(Person.isMEI(salary, person.isAnotherCompanyOwner(), person.isPensioner(), person.isPublicServer(), birthDate));
+        assertTrue(Person.isMEI(salary, person.isAnotherCompanyOwner(), person.isPensioner(), person.isPublicServer(), person.getBirthDate()));
     }
 
     @Test
     public void person_is_not_MEI() {
         float salary = 50000;
-        Date birthDate = new Date(2000, Calendar.JANUARY, 1);
+        Date birthDate = new Calendar.Builder().setDate(1942, Calendar.JANUARY, 8).build().getTime();
         Person person = new Person();
         person.setPublicServer(true);
         person.setPensioner(true);
