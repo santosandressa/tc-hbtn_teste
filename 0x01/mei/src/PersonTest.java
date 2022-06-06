@@ -1,12 +1,11 @@
-package src;
-
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class PersonTest {
 
@@ -19,7 +18,6 @@ public class PersonTest {
         person.setAnotherCompanyOwner(true);
         person.setPensioner(true);
         person.setPublicServer(true);
-
     }
 
     public void show_full_name(){
