@@ -10,9 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PersonTest {
 
+    Person person;
+
     @BeforeEach
     public void setUp() {
-        Person person = new Person();
+        person = new Person();
         person.setName("Paul");
         person.setSurname("McCartney");
         person.setBirthDate(new Calendar.Builder().setDate(1942, Calendar.JANUARY, 8).build().getTime());
@@ -23,7 +25,7 @@ public class PersonTest {
 
     @Test
     public void show_full_name() {
-        assertEquals("Paul McCartney", Person.fullName("Paul", "McCartney"));
+        assertEquals("Paul McCartney", Person.fullName(person.getName(), person.getSurname()));
     }
 
     @Test
@@ -48,6 +50,7 @@ public class PersonTest {
         float salary = 50000;
         Date birthDate = new Calendar.Builder().setDate(1942, Calendar.JANUARY, 8).build().getTime();
         Person person = new Person();
+        person.setBirthDate(birthDate);
         person.setPublicServer(true);
         person.setPensioner(true);
         person.setAnotherCompanyOwner(true);

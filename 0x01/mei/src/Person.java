@@ -79,4 +79,5 @@ public class Person {
     public static boolean isMEI(float salary, boolean anotherCompanyOwner, boolean pensioner, boolean publicServer, Date birthDate) {
         return (salary * 12) < 130000 && !anotherCompanyOwner && !pensioner && !publicServer && birthDate.getTime() < 2002;
     }
+
 }

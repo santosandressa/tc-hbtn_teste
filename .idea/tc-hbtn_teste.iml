@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/0x01/email/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/0x01/mei" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/0x02/password/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/0x01/java_jdbc" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -27,5 +28,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="sqlite-jdbc-3.36.0.3" level="project" />
   </component>
 </module>
